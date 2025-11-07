@@ -13,7 +13,7 @@ from langserve import add_routes
 #聊天机器人案例
 client = ChatOpenAI(
     model = "deepseek-chat",
-    api_key=os.environ.get('sk-e9db8e390cbf4a2bbe48ed154479a427'),
+    api_key=os.environ.get("OPENAI_API_KEY"),
     base_url="https://api.deepseek.com")
 
 #定义提示模板
@@ -79,3 +79,4 @@ for resp in do_message.stream(
 
 print(store)
 print(get_session_history('zs123'))
+
