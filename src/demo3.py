@@ -13,8 +13,9 @@ if not api_key:
  raise RuntimeError("未检测到 API Key。请先在当前窗口执行: set DEEPSEEK_API_KEY=你的密钥 或 set OPENAI_API_KEY=你的密钥")
 client = ChatOpenAI(
     model = "deepseek-chat",
-    api_key=os.environ.get('sk-e9db8e390cbf4a2bbe48ed154479a427'),
+    api_key=os.environ.get("OPENAI_API_KEY"),
     base_url="https://api.deepseek.com")
+
 
 # 可选：如果你仍然需要代理用于其他网络请求，可以保留；与 FastEmbed 无关
 os.environ["http_proxy"] = "http://127.0.0.1:7890"
@@ -72,5 +73,6 @@ prompt_temp = ChatPromptTemplate.from_messages([('human',message)])
 chain = {'question': RunnablePassthrough(), 'context': retriever | RunnableLambda(format_docs),} | prompt_temp | client
 
 resp = chain.invoke('请介绍一下猫？')
+
 
 print(resp.content)
